@@ -12,7 +12,7 @@ An investment calculator that calculates yearly investment growth based on user 
 
 **Concepts:** React components, `useState`, forms, two-way binding, derived data, lists, conditional rendering.
 
-[View Project →](./investment-calculator)
+[View Project →](./1.investment-calculator)
 
 ### Tic-Tac-Toe
 
@@ -20,7 +20,7 @@ A two-player Tic-Tac-Toe game with custom player names, winner detection, draw d
 
 **Concepts:** State management, props, derived state, event handling, immutable updates, component composition.
 
-[View Project →](./tic-tac-toe)
+[View Project →](./2.tic-tac-toe)
 
 ## Tech Stack
 
