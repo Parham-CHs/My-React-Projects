@@ -16,4 +16,4 @@ React components, `useState`, controlled inputs, two-way binding, derived data, 
 
 ### Live Preview
 
-[View the project on CodeSandbox](YOUR_CODESANDBOX_LINK)
+[View the project on CodeSandbox](https://codesandbox.io/p/sandbox/adoring-water-5f6fv2)
