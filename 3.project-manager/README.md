@@ -19,4 +19,4 @@ React components, `useState`, `useRef`, props, state lifting, immutable updates,
 
 ### Live Preview
 
-[View the project on CodeSandbox](https://codesandbox.io/p/devbox/project-mgmt-start-forked-2y4tv2?workspaceId=ws_PREJnfYXxMG1xga2XwcbTw)
+[View the project on CodeSandbox](https://codesandbox.io/p/devbox/charming-cookies-2y4tv2)
