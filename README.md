@@ -22,6 +22,14 @@ A two-player Tic-Tac-Toe game with custom player names, winner detection, draw d
 
 [View Project →](./2.tic-tac-toe)
 
+### Project Manager
+
+A project management app that allows users to create projects, manage tasks, and view or edit project details.
+
+**Concepts:** `useState`, `useRef`, props, state lifting, immutable updates, conditional rendering, component composition, portals, and imperative handles.
+
+[View Project →](https://github.com/Parham-CHs/My-React-Projects/blob/main/3.project-manager)
+
 ## Tech Stack
 
 * React
