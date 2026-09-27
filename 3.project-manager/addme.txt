@@ -1,0 +1,3 @@
+dialouge
+on eror input 
+useimpretive function and ref
