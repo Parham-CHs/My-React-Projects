@@ -79,7 +79,7 @@ export default function EditProject({ projects, projectId, setProjects, deletePr
                 </div>
 
                 {/* Description */}
-                <p className="text-xl text-zinc-800 mb-10">
+                <p className="text-xl text-zinc-800 mb-10 whitespace-pre-wrap">
                     {project.description}
                 </p>
 
