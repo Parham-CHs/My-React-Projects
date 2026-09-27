@@ -19,7 +19,7 @@ export default function DataTable({ userInput }) {
 
             <tbody>
                 {result.map(eachRow =>
-                    <tr>
+                    <tr key={eachRow.year}>
                         <td>{eachRow.year}</td>
                         <td>{formatter.format(eachRow.valueEndOfYear)}</td>
                         <td>{formatter.format(eachRow.interest)}</td>
