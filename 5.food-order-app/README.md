@@ -20,5 +20,5 @@ React components, Context API, `useReducer`, `useState`, `useEffect`, `useCallba
 <!--
 ### Live Preview
 
-[View the project on CodeSandbox](YOUR_CODESANDBOX_URL)
+[View the project on CodeSandbox]()
 -->
