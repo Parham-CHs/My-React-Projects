@@ -46,6 +46,14 @@ A food ordering application where users can browse available meals, add items to
 
 [View Project →](./5.food-order-app)
 
+### ReduxCart
+
+A shopping cart application built with React and Redux Toolkit. Users can browse products, add or remove items, adjust quantities, and view cart updates. Cart data is synchronized with Firebase so the cart can be restored when the app loads.
+
+**Concepts:** Redux Toolkit, `createSlice`, `configureStore`, React-Redux, `useSelector`, `useDispatch`, Redux actions and reducers, asynchronous thunks, HTTP requests with Fetch API, Firebase persistence, shared state management, and UI notifications.
+
+[View Project →](./6.redux-cart)
+
 ## Tech Stack
 
 * React
