@@ -54,6 +54,14 @@ A shopping cart application built with React and Redux Toolkit. Users can browse
 
 [View Project →](./6.redux-cart)
 
+### EventHub
+
+An event management application built with React and React Router. Users can browse events and view their details, while authenticated users can create, edit, and delete events. The app includes login and signup flows, protected routes, and asynchronous data loading.
+
+**Concepts:** React Router, `createBrowserRouter`, nested routes, layouts with `Outlet`, route loaders and actions, `useLoaderData`, `useRouteLoaderData`, `useNavigation`, `useFetcher`, `defer` and `Await`, form submissions, authentication, protected routes, token management, HTTP requests, and error handling.
+
+[View Project →](./7.eventhub-app)
+
 ## Tech Stack
 
 * React
