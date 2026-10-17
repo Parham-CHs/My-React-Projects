@@ -28,7 +28,15 @@ A project management app that allows users to create projects, manage tasks, and
 
 **Concepts:** `useState`, `useRef`, props, state lifting, immutable updates, conditional rendering, component composition, portals, and imperative handles.
 
-[View Project →](https://github.com/Parham-CHs/My-React-Projects/blob/main/3.project-manager)
+[View Project →](./3.project-manager)
+
+### Quiz App
+
+An interactive timed quiz app that lets users answer multiple-choice questions, skip unanswered questions, and review their results when the quiz is completed.
+
+**Concepts:** React components, `useState`, `useCallback`, `useRef`, `useEffect`, props, state management, timer management, cleanup functions, conditional rendering, and derived data.
+
+[View Project →](./4.quiz-app)
 
 ## Tech Stack
 
