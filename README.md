@@ -38,6 +38,14 @@ An interactive timed quiz app that lets users answer multiple-choice questions, 
 
 [View Project →](./4.quiz-app)
 
+### Food Order App
+
+A food ordering application where users can browse available meals, add items to their cart, adjust quantities, and submit orders through a checkout form.
+
+**Concepts:** React Context API, `useReducer`, `useState`, `useEffect`, `useCallback`, `useContext`, custom hooks, state management, HTTP requests, form handling with `useActionState`, portals, modal dialogs, and error handling.
+
+[View Project →](./5.food-order-app)
+
 ## Tech Stack
 
 * React
