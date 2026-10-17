@@ -60,7 +60,7 @@ An event management application built with React and React Router. Users can bro
 
 **Concepts:** React Router, `createBrowserRouter`, nested routes, layouts with `Outlet`, route loaders and actions, `useLoaderData`, `useRouteLoaderData`, `useNavigation`, `useFetcher`, `defer` and `Await`, form submissions, authentication, protected routes, token management, HTTP requests, and error handling.
 
-[View Project →](./7.eventhub-app)
+[View Project →](./7.EventHub-app)
 
 ## Tech Stack
 
