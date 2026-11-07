@@ -10,26 +10,14 @@ type Props = {
 
 export default function NodeConfigPanel({ selectedNode, onLabelChange, onDelete, onFilterConfigChange, }: Props) {
 
-    // const updateFilterField = (
-    //     field: keyof FilterConfig,
-    //     value: string
-    // ) => {
-    //     if (data.kind !== 'filter') return;
-
-    //     onFilterConfigChange({
-    //         ...data.config,
-    //         [field]: value,
-    //     });
-    // };
-
     const updateFilterField = <K extends keyof FilterConfig>(
         field: K,
         value: FilterConfig[K]
     ) => {
-        if (data.kind !== 'filter') return;
+        if (!selectedNode || selectedNode.data.kind !== 'filter') return;
 
         onFilterConfigChange({
-            ...data.config,
+            ...selectedNode.data.config,
             [field]: value,
         });
     };
@@ -44,8 +32,6 @@ export default function NodeConfigPanel({ selectedNode, onLabelChange, onDelete,
             />
         );
     }
-
-    const { data } = selectedNode;
 
     return (
         <aside
@@ -95,10 +81,10 @@ export default function NodeConfigPanel({ selectedNode, onLabelChange, onDelete,
             </div>
             <div className="mb-5">
                 <p className="mb-3 text-sm font-medium capitalize text-violet-400">
-                    {data.kind} Settings
+                    {selectedNode.data.kind} Settings
                 </p>
 
-                {data.kind === 'filter' && (
+                {selectedNode.data.kind === 'filter' && (
                     <div className="space-y-4">
                         <div>
                             <label className="mb-2 block text-sm text-zinc-400">
@@ -106,7 +92,7 @@ export default function NodeConfigPanel({ selectedNode, onLabelChange, onDelete,
                             </label>
 
                             <input
-                                value={data.config.field}
+                                value={selectedNode.data.config.field}
                                 onChange={(event) =>
                                     updateFilterField(
                                         'field',
@@ -124,7 +110,7 @@ export default function NodeConfigPanel({ selectedNode, onLabelChange, onDelete,
                             </label>
 
                             <select
-                                value={data.config.operator}
+                                value={selectedNode.data.config.operator}
                                 // Operator select
                                 onChange={(event) => updateFilterField('operator', event.target.value as FilterConfig['operator'])
                                 } className="w-full rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2 outline-none focus:border-violet-500"
@@ -142,7 +128,7 @@ export default function NodeConfigPanel({ selectedNode, onLabelChange, onDelete,
                             </label>
 
                             <input
-                                value={data.config.value}
+                                value={selectedNode.data.config.value}
                                 onChange={(event) =>
                                     updateFilterField('value', event.target.value)
                                 }
@@ -153,13 +139,13 @@ export default function NodeConfigPanel({ selectedNode, onLabelChange, onDelete,
                     </div>
                 )}
 
-                {data.kind === 'trigger' && (
+                {selectedNode.data.kind === 'trigger' && (
                     <p className="text-sm text-zinc-400">
                         Trigger configuration coming next.
                     </p>
                 )}
 
-                {data.kind === 'action' && (
+                {selectedNode.data.kind === 'action' && (
                     <p className="text-sm text-zinc-400">
                         Action configuration coming next.
                     </p>
