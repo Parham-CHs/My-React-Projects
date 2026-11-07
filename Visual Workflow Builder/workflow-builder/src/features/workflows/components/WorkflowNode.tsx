@@ -1,12 +1,10 @@
 import {
     Handle,
     Position,
-    type Node,
     type NodeProps,
 } from '@xyflow/react';
-import type { WorkflowNodeData } from '../types';
+import type { WorkflowNodeType } from '../types';
 
-type WorkflowNodeType = Node<WorkflowNodeData, 'workflow'>;
 
 export default function WorkflowNode({ data }: NodeProps<WorkflowNodeType>) {
     return (

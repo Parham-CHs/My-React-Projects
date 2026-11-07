@@ -1,3 +1,7 @@
+import { type Node } from '@xyflow/react';
+
+export type WorkflowNodeType = Node<WorkflowNodeData, 'workflow'>;
+
 export const NODE_KINDS = [
     'trigger',
     'action',
