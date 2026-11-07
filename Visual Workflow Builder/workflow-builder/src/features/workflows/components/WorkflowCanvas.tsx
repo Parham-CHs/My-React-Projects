@@ -5,34 +5,26 @@ import {
     MiniMap,
     type NodeChange,
     type EdgeChange,
-    // applyNodeChanges,
-    // applyEdgeChanges,
-    type Node,
-    // type Edge,
-    // type NodeChange,
+    // type Node,
 
-    // addEdge,
     type Connection
 } from '@xyflow/react';
 
-import type { WorkflowNodeData, FilterConfig } from '../types';
+//types
+import type { FilterConfig, WorkflowNodeType } from '../types';
 
-
+//UI
+import Toolbar from './toolbar';
+import WorkflowNode from './WorkflowNode';
 import NodeConfigPanel from './NodeConfigPanel';
 
-
-import WorkflowNode from './WorkflowNode';
-// import { NODE_KINDS } from './WorkflowNode';
-// import type { NodeKind } from './WorkflowNode';
-
-
-import { useAppDispatch, useAppSelector } from '../../../app/hooks'
+//Redux
 import { workflowActions } from '../workflowSlice';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks'
 
-
-
+//Css
 import '@xyflow/react/dist/style.css';
-import Toolbar from './toolbar';
+
 
 const nodeTypes = {
     workflow: WorkflowNode,
@@ -41,30 +33,30 @@ const nodeTypes = {
 
 export default function WorkflowCanvas() {
 
-    // load states from Redux store (subscribtion)
-    const nodes = useAppSelector((state) => state.workflow.nodes);
-    const edges = useAppSelector((state) => state.workflow.edges);
-    const selectedNodeId = useAppSelector((state) => state.workflow.selectedNodeId);
+    //Selector and Dispatch
+    const { nodes, edges, selectedNodeId } = useAppSelector((state) => state.workflow);
     const selectedNode = nodes.find((node) => node.id === selectedNodeId) ?? null;
 
     const dispatch = useAppDispatch();
-    
+
+
+
     // handle functions
+    const handleNodeUpdate = (nodeChange: NodeChange<WorkflowNodeType>[]) => {
+        dispatch(workflowActions.updateNodes(nodeChange));
+    };
+
     // const handleAddNode = (kind: WorkflowNodeData['kind']) => {
     //     dispatch(workflowActions.addNode({ kind }));
     // };
-
-    const handleNodeUpdate = (nodeChange: NodeChange<Node<WorkflowNodeData, 'workflow'>>[]) => {
-        dispatch(workflowActions.updateNodes(nodeChange));
-    };
 
     const handleEdgeUpdate = (edgeChange: EdgeChange[]) => {
         dispatch(workflowActions.updateEdges(edgeChange));
     };
 
 
-    const handleNodeClick = (selectedNode: Node) => {
-        dispatch(workflowActions.focusNode({ selectedNodeId: selectedNode.id }));
+    const handleNodeClick = (selectedNode: WorkflowNodeType) => {
+        dispatch(workflowActions.setSelectedNode(selectedNode.id));
     };
 
     const handleNodeLabelChange = (newLabel: string) => {
@@ -78,7 +70,7 @@ export default function WorkflowCanvas() {
     };
 
     const unFocusNode = () => {
-        dispatch(workflowActions.unfocusNode());
+        dispatch(workflowActions.setSelectedNode(null));
     };
 
     const handleDeleteNode = () => {
@@ -86,7 +78,7 @@ export default function WorkflowCanvas() {
         dispatch(workflowActions.deleteNode(selectedNode.id));
     };
 
-    const handleFilterConfigChange = (config: FilterConfig) => {
+    const handleFilterConfigChange = (config: FilterConfig): void => {
         if (!selectedNode) return;
 
         dispatch(
@@ -99,13 +91,12 @@ export default function WorkflowCanvas() {
     // end of handle functions
 
     return (
-
         <div className="flex h-screen w-full">
 
             <div className="flex min-w-0 flex-1 flex-col">
 
                 {/* Toolbar */}
-                <Toolbar/>
+                <Toolbar />
 
                 {/* Canvas */}
                 <div className="min-h-0 flex-1">

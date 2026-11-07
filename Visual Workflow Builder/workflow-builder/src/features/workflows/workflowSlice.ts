@@ -3,7 +3,7 @@ import {
     type Node, type Edge, type NodeChange, type EdgeChange, type Connection,
     addEdge, applyNodeChanges, applyEdgeChanges
 } from '@xyflow/react';
-import type { WorkflowNodeData, FilterConfig, TriggerConfig, ActionConfig, } from './types';
+import type { WorkflowNodeData, FilterConfig, TriggerConfig, ActionConfig, NodeKind } from './types';
 
 type WorkflowNode = Node<WorkflowNodeData, 'workflow'>;
 
@@ -20,7 +20,7 @@ const initialState: WorkflowState = {
 };
 
 function createWorkflowNode(
-    kind: WorkflowNodeData['kind'],
+    kind: NodeKind,
     position: { x: number; y: number }
 ): Node<WorkflowNodeData, 'workflow'> {
     const id = crypto.randomUUID();
@@ -64,59 +64,13 @@ function createWorkflowNode(
     }
 }
 
-// function createWorkflowNode(
-//     kind: WorkflowNodeData['kind'],
-//     position: { x: number; y: number }
-// ): Node<WorkflowNodeData, 'workflow'> {
-
-//     const labels = {
-//         trigger: 'New Trigger',
-//         action: 'New Action',
-//         filter: 'New Filter',
-//     };
-
-//     return {
-//         id: crypto.randomUUID(),
-//         type: 'workflow',
-//         position,
-//         data: {
-//             label: labels[kind],
-//             kind,
-//             config: createDefaultConfig(kind),
-//         },
-//     };
-// }
-
-// function createDefaultConfig(
-//     kind: WorkflowNodeData['kind']
-// ): WorkflowNodeData['config'] {
-//     switch (kind) {
-//         case 'trigger':
-//             return {
-//                 triggerType: 'manual',
-//             } satisfies TriggerConfig;
-
-//         case 'action':
-//             return {
-//                 method: 'GET',
-//                 url: '',
-//             } satisfies ActionConfig;
-
-//         case 'filter':
-//             return {
-//                 field: '',
-//                 operator: 'equals',
-//                 value: '',
-//             } satisfies FilterConfig;
-//     }
-// }
 
 function createDefaultConfig(kind: 'trigger'): TriggerConfig;
 function createDefaultConfig(kind: 'action'): ActionConfig;
 function createDefaultConfig(kind: 'filter'): FilterConfig;
 
 function createDefaultConfig(
-    kind: WorkflowNodeData['kind']
+    kind: NodeKind
 ): TriggerConfig | ActionConfig | FilterConfig {
     switch (kind) {
         case 'trigger':
@@ -179,14 +133,11 @@ const workflowSlice = createSlice({
             }
         },
 
-        focusNode: (state,
-            action: PayloadAction<{ selectedNodeId: string }>
+        setSelectedNode: (
+            state,
+            action: PayloadAction<string | null>  // WorkflowState[selectedNodeId]
         ) => {
-            state.selectedNodeId = (action.payload.selectedNodeId);
-        },
-
-        unfocusNode: (state) => {
-            state.selectedNodeId = null;
+            state.selectedNodeId = action.payload;
         },
 
         updateEdges: (state,
