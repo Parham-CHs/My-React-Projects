@@ -1,4 +1,11 @@
-export type NodeKind = 'trigger' | 'action' | 'filter';
+export const NODE_KINDS = [
+    'trigger',
+    'action',
+    'filter',
+] as const;
+// export type NodeKind = 'trigger' | 'action' | 'filter';
+export type NodeKind = typeof NODE_KINDS[number];
+
 
 export type FilterConfig = {
     field: string;

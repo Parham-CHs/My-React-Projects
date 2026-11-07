@@ -4,22 +4,7 @@ import {
     type Node,
     type NodeProps,
 } from '@xyflow/react';
-
-// export type NodeKind = 'trigger' | 'action' | 'filter';
-
-export const NODE_KINDS = [
-    'trigger',
-    'action',
-    'filter',
-] as const;
-
-export type NodeKind = typeof NODE_KINDS[number];
-
-export type WorkflowNodeData = {
-    label: string;
-    kind: NodeKind;
-    data: Record<string, any>;
-};
+import type { WorkflowNodeData } from '../types';
 
 type WorkflowNodeType = Node<WorkflowNodeData, 'workflow'>;
 

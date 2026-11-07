@@ -1,7 +1,6 @@
 import { useAppDispatch } from '../../../app/hooks';
-import { NODE_KINDS } from './WorkflowNode';
 import { workflowActions } from '../workflowSlice';
-import type { WorkflowNodeData } from '../types';
+import { NODE_KINDS, type WorkflowNodeData } from '../types';
 
 
 export default function Toolbar() {
