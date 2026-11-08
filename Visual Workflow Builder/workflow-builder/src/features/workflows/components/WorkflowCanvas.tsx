@@ -11,12 +11,12 @@ import {
 } from '@xyflow/react';
 
 //types
-import type { FilterConfig, WorkflowNodeType } from '../types';
+import type { ConfigPayload, WorkflowNodeType } from '../types';
 
 //UI
 import Toolbar from './toolbar';
 import WorkflowNode from './WorkflowNode';
-import NodeConfigPanel from './NodeConfigPanel';
+import NodeConfigPanel from './NodeConfigPanel/NodeConfigPanel';
 
 //Redux
 import { workflowActions } from '../workflowSlice';
@@ -78,14 +78,21 @@ export default function WorkflowCanvas() {
         dispatch(workflowActions.deleteNode(selectedNode.id));
     };
 
-    const handleFilterConfigChange = (config: FilterConfig): void => {
-        if (!selectedNode) return;
+    // const handleConfigChange = (config: FilterConfig | ActionConfig | TriggerConfig): void => {
+    //     if (!selectedNode) return;
+    //     if (typeof config == FilterConfig)
+    //         dispatch(
+    //             workflowActions.updateFilterConfig({
+    //                 nodeId: selectedNode.id,
+    //                 config,
+    //             })
+    //         );
+    // };
 
+    const handleConfigChange = (config: ConfigPayload): void => {
+        if (!selectedNode) return;
         dispatch(
-            workflowActions.updateFilterConfig({
-                nodeId: selectedNode.id,
-                config,
-            })
+            workflowActions.updateConfig(config)
         );
     };
     // end of handle functions
@@ -124,7 +131,7 @@ export default function WorkflowCanvas() {
                 selectedNode={selectedNode}
                 onDelete={handleDeleteNode}
                 onLabelChange={handleNodeLabelChange}
-                onFilterConfigChange={handleFilterConfigChange}
+                onConfigChange={handleConfigChange}
             />
         </div>
 
