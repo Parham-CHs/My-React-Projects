@@ -27,6 +27,7 @@ import '@xyflow/react/dist/style.css';
 
 import validateWorkflow from '../utils/validateWorkflow'
 import ValidationResults from './ValidationResults';
+import { useState } from 'react';
 
 
 const nodeTypes = {
@@ -35,6 +36,7 @@ const nodeTypes = {
 
 
 export default function WorkflowCanvas() {
+    const [isErrorVisible, setErrorVisible] = useState(false)
 
     //Selector and Dispatch
     const { nodes, edges, selectedNodeId, validationErrors } = useAppSelector((state) => state.workflow);
@@ -101,6 +103,7 @@ export default function WorkflowCanvas() {
 
     const handleValidation = (): void => {
         dispatch(workflowActions.setValidationErrors(validateWorkflow(nodes)))
+        setErrorVisible(true)
     };
     // end of handle functions
 
@@ -140,7 +143,10 @@ export default function WorkflowCanvas() {
                 onLabelChange={handleNodeLabelChange}
                 onConfigChange={handleConfigChange}
             />
-            <ValidationResults errors={validationErrors} onErrorClick={handleNodeClick} onClose={()=>{}}/>
+
+            {/* {Error Validation Module} */}
+            {isErrorVisible && <ValidationResults errors={validationErrors} onErrorClick={handleNodeClick}
+                onClose={() => setErrorVisible(false)} />}
         </div>
 
     );

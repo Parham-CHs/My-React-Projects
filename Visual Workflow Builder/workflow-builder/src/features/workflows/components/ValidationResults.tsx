@@ -12,13 +12,13 @@ export default function ValidationResults({
     onClose,
 }: Props) {
     return (
-        <div className="absolute left-4 top-20 z-50 w-80 rounded-lg border border-zinc-700 bg-zinc-900 p-4 shadow-xl">
+        <div className="absolute left-4 top-18 z-50 w-80 rounded-lg border border-zinc-700 bg-zinc-900 p-3 shadow-xl">
             <div className="mb-3 flex items-center justify-between">
                 <h2 className="font-semibold text-white">
                     Validation Results
                 </h2>
 
-                <button onClick={onClose}>
+                <button onClick={onClose} className='text-red-500 border-2 border-red-500 p-1 rounded-md'>
                     Close
                 </button>
             </div>
