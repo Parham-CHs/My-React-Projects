@@ -1,8 +1,8 @@
 import type { Node } from '@xyflow/react';
 import type { WorkflowNodeData, FilterConfig, ConfigPayload } from '../../../types';
 
-import ConfigInput from '../ConfigInput';
-import ConfigSelect from '../ConfigSelect';
+import ConfigInput from '../Input/ConfigInput';
+import ConfigSelect from '../Input/ConfigSelect';
 
 const FILTER_OPTIONS = [
     { value: 'equals', label: 'Equals' },
@@ -18,12 +18,15 @@ type Props = {
 
 export default function FilterConfigForm({ selectedNode, onConfigChange }: Props) {
 
+  if (selectedNode.data.kind !== 'filter') return null;
+
+  const config = selectedNode.data.config; // now narrowed to FilterConfig
+
     const updateFilterConfig = <K extends keyof FilterConfig>(
         field: K,
         value: FilterConfig[K]
     ) => {
-        if (selectedNode.data.kind !== 'filter') return;
-        const filterConfig: FilterConfig = { ...selectedNode.data.config, [field]: value, }
+        const filterConfig: FilterConfig = { ...config, [field]: value, }
         onConfigChange({
             nodeId: selectedNode.id,
             kind: 'filter',
@@ -31,9 +34,6 @@ export default function FilterConfigForm({ selectedNode, onConfigChange }: Props
         });
     };
 
-    if (selectedNode.data.kind !== 'filter') return null;
-
-    const config = selectedNode.data.config; // now narrowed to FilterConfig
     
     return (
       <>
