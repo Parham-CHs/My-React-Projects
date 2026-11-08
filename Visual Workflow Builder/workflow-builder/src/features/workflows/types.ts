@@ -1,7 +1,5 @@
 import { type Node } from '@xyflow/react';
 
-export type WorkflowNodeType = Node<WorkflowNodeData, 'workflow'>;
-
 export const NODE_KINDS = [
     'trigger',
     'action',
@@ -10,21 +8,7 @@ export const NODE_KINDS = [
 // export type NodeKind = 'trigger' | 'action' | 'filter';
 export type NodeKind = typeof NODE_KINDS[number];
 
-
-export type FilterConfig = {
-    field: string;
-    operator: 'equals' | 'notEquals' | 'greaterThan' | 'lessThan';
-    value: string;
-};
-
-export type TriggerConfig = {
-    triggerType: 'manual' | 'webhook';
-};
-
-export type ActionConfig = {
-    method: 'GET' | 'POST' | 'PUT' | 'DELETE';
-    url: string;
-};
+export type WorkflowNodeType = Node<WorkflowNodeData, 'workflow'>;
 
 export type WorkflowNodeData =
     | {
@@ -42,6 +26,26 @@ export type WorkflowNodeData =
         kind: 'action';
         config: ActionConfig;
     };
+
+export type FilterConfig = {
+    field: string;
+    operator: 'equals' | 'notEquals' | 'greaterThan' | 'lessThan';
+    value: string;
+};
+
+export type TriggerConfig = {
+    triggerType: 'manual' | 'webhook';
+};
+
+export type ActionConfig = {
+    method: 'GET' | 'POST' | 'PUT' | 'DELETE';
+    url: string;
+};
+
+export type ConfigPayload =
+  | { nodeId: string; kind: 'trigger'; config: TriggerConfig }
+  | { nodeId: string; kind: 'action';  config: ActionConfig  }
+  | { nodeId: string; kind: 'filter';  config: FilterConfig  };
 
 
 
