@@ -28,7 +28,7 @@ export default function Toolbar({ onValidation }: Props) {
                 )}
                 <button
                     onClick={onValidation}
-                    className="rounded-md bg-green-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-green-700 active:bg-violet-700"
+                    className="rounded-md bg-green-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-green-700 active:bg-green-500"
                 >
                     Validate Workflow
                 </button>
