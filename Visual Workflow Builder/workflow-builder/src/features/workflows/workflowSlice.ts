@@ -3,7 +3,7 @@ import {
     type Node, type Edge, type NodeChange, type EdgeChange, type Connection,
     addEdge, applyNodeChanges, applyEdgeChanges
 } from '@xyflow/react';
-import type { WorkflowNodeData, FilterConfig, TriggerConfig, ActionConfig, NodeKind } from './types';
+import type { WorkflowNodeData, FilterConfig, TriggerConfig, ActionConfig, NodeKind, ConfigPayload } from './types';
 
 type WorkflowNode = Node<WorkflowNodeData, 'workflow'>;
 
@@ -185,22 +185,43 @@ const workflowSlice = createSlice({
             }
         },
 
-        updateFilterConfig: (
+        updateConfig: (
             state,
-            action: PayloadAction<{
-                nodeId: string;
-                config: FilterConfig;
-            }>
+            action: PayloadAction<ConfigPayload>
         ) => {
-            const node = state.nodes.find(
-                node => node.id === action.payload.nodeId
-            );
+            const { nodeId, kind, config } = action.payload;
+            const node = state.nodes.find(node => node.id === nodeId);
+            if (!node || kind !== node.data.kind) return;
+            node.data.config = config as typeof node.data.config;
+        }
 
-            if (node && node.data.kind === 'filter') {
-                node.data.config = action.payload.config;
-            }
-        },
-
+        // updateConfig: (
+        //     state,
+        //     action: PayloadAction<ConfigPayload>
+        // ) => {
+        //     const { nodeId, kind, config } = action.payload;
+        
+        //     const node = state.nodes.find(node => node.id === nodeId);
+        
+        //     if (!node) return;
+        
+        //     switch (kind) {
+        //         case 'filter':
+        //             if (node.data.kind !== 'filter') return;
+        //             node.data.config = config;
+        //             break;
+        
+        //         case 'action':
+        //             if (node.data.kind !== 'action') return;
+        //             node.data.config = config;
+        //             break;
+        
+        //         case 'trigger':
+        //             if (node.data.kind !== 'trigger') return;
+        //             node.data.config = config;
+        //             break;
+        //     }
+        // }
 
     }
 });
