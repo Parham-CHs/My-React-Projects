@@ -2,8 +2,11 @@ import { useAppDispatch } from '../../../app/hooks';
 import { workflowActions } from '../workflowSlice';
 import { NODE_KINDS, type WorkflowNodeData } from '../types';
 
+type Props = {
+    onValidation: () => void;
+};
 
-export default function Toolbar() {
+export default function Toolbar({ onValidation }: Props) {
 
     const dispatch = useAppDispatch();
 
@@ -23,6 +26,12 @@ export default function Toolbar() {
                         + Add {eachNodeKind.charAt(0).toUpperCase() + eachNodeKind.slice(1)} Node
                     </button>
                 )}
+                <button
+                    onClick={onValidation}
+                    className="rounded-md bg-green-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-green-700 active:bg-violet-700"
+                >
+                    Validate Workflow
+                </button>
             </div>
         </div>
     )

@@ -1,9 +1,5 @@
-import type { WorkflowNodeType } from "../types";
+import type { ValidationError, WorkflowNodeType } from "../types";
 
-type ValidationError = {
-    nodeId: string;
-    message: string;
-};
 
 export default function validateWorkflow(nodes: WorkflowNodeType[]): ValidationError[] {
     const errors: ValidationError[] = [];

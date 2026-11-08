@@ -47,5 +47,7 @@ export type ConfigPayload =
   | { nodeId: string; kind: 'action';  config: ActionConfig  }
   | { nodeId: string; kind: 'filter';  config: FilterConfig  };
 
-
-
+  export type ValidationError = {
+    nodeId: string;
+    message: string;
+};

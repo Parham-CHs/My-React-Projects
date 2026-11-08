@@ -25,6 +25,9 @@ import { useAppDispatch, useAppSelector } from '../../../app/hooks'
 //Css
 import '@xyflow/react/dist/style.css';
 
+import validateWorkflow from '../utils/validateWorkflow'
+import ValidationResults from './ValidationResults';
+
 
 const nodeTypes = {
     workflow: WorkflowNode,
@@ -34,7 +37,7 @@ const nodeTypes = {
 export default function WorkflowCanvas() {
 
     //Selector and Dispatch
-    const { nodes, edges, selectedNodeId } = useAppSelector((state) => state.workflow);
+    const { nodes, edges, selectedNodeId, validationErrors } = useAppSelector((state) => state.workflow);
     const selectedNode = nodes.find((node) => node.id === selectedNodeId) ?? null;
 
     const dispatch = useAppDispatch();
@@ -55,8 +58,8 @@ export default function WorkflowCanvas() {
     };
 
 
-    const handleNodeClick = (selectedNode: WorkflowNodeType) => {
-        dispatch(workflowActions.setSelectedNode(selectedNode.id));
+    const handleNodeClick = (nodeId: string) => {
+        dispatch(workflowActions.setSelectedNode(nodeId));
     };
 
     const handleNodeLabelChange = (newLabel: string) => {
@@ -95,6 +98,10 @@ export default function WorkflowCanvas() {
             workflowActions.updateConfig(config)
         );
     };
+
+    const handleValidation = (): void => {
+        dispatch(workflowActions.setValidationErrors(validateWorkflow(nodes)))
+    };
     // end of handle functions
 
     return (
@@ -103,7 +110,7 @@ export default function WorkflowCanvas() {
             <div className="flex min-w-0 flex-1 flex-col">
 
                 {/* Toolbar */}
-                <Toolbar />
+                <Toolbar onValidation={handleValidation} />
 
                 {/* Canvas */}
                 <div className="min-h-0 flex-1">
@@ -114,7 +121,7 @@ export default function WorkflowCanvas() {
                         onNodesChange={handleNodeUpdate}
                         onEdgesChange={handleEdgeUpdate}
                         onConnect={handleConnect}
-                        onNodeClick={(_, node) => handleNodeClick(node)}
+                        onNodeClick={(_, node) => handleNodeClick(node.id)}
                         onPaneClick={unFocusNode}
                         fitView
                     >
@@ -133,6 +140,7 @@ export default function WorkflowCanvas() {
                 onLabelChange={handleNodeLabelChange}
                 onConfigChange={handleConfigChange}
             />
+            <ValidationResults errors={validationErrors} onErrorClick={handleNodeClick} onClose={()=>{}}/>
         </div>
 
     );

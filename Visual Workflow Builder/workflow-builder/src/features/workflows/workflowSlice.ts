@@ -3,7 +3,7 @@ import {
     type Node, type Edge, type NodeChange, type EdgeChange, type Connection,
     addEdge, applyNodeChanges, applyEdgeChanges
 } from '@xyflow/react';
-import type { WorkflowNodeData, FilterConfig, TriggerConfig, ActionConfig, NodeKind, ConfigPayload } from './types';
+import type { WorkflowNodeData, FilterConfig, TriggerConfig, ActionConfig, NodeKind, ConfigPayload, ValidationError } from './types';
 
 type WorkflowNode = Node<WorkflowNodeData, 'workflow'>;
 
@@ -11,12 +11,14 @@ type WorkflowState = {
     nodes: WorkflowNode[];
     edges: Edge[];
     selectedNodeId: string | null;
+    validationErrors: ValidationError[];
 };
 
 const initialState: WorkflowState = {
     nodes: [],
     edges: [],
     selectedNodeId: null,
+    validationErrors:[]
 };
 
 function createWorkflowNode(
@@ -193,7 +195,7 @@ const workflowSlice = createSlice({
             const node = state.nodes.find(node => node.id === nodeId);
             if (!node || kind !== node.data.kind) return;
             node.data.config = config as typeof node.data.config;
-        }
+        },
 
         // updateConfig: (
         //     state,
@@ -223,6 +225,17 @@ const workflowSlice = createSlice({
         //     }
         // }
 
+    
+        setValidationErrors: (
+            state,
+            action: PayloadAction<ValidationError[]>
+        ) => {
+            state.validationErrors = action.payload;
+        },
+
+        clearValidationErrors: (state) => {
+            state.validationErrors = [];
+        },
     }
 });
 
